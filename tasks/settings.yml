@@ -1,37 +1,37 @@
 ---
 - name: Check if jenkins_init_folder exists.
   stat:
-    path: "{{ jenkins_init_folder }}"
+    path: "/etc/systemd/system/jenkins.service.d"
   register: jenkins_init_folder_stat
 
 - name: Ensure jenkins_init_folder exists.
   file:
-    path: "{{ jenkins_init_folder }}"
+    path: "/etc/systemd/system/jenkins.service.d"
     state: directory
     mode: 0644
   when: not jenkins_init_folder_stat.stat.exists
 
 - name: Check if jenkins_init_file exists.
   stat:
-    path: "{{ jenkins_init_file }}"
+    path: "/etc/systemd/system/jenkins.service.d/override.conf"
   register: jenkins_init_file_stat
 
 - name: Ensure jenkins_init_file exists.
   file:
-    path: "{{ jenkins_init_file }}"
+    path: "/etc/systemd/system/jenkins.service.d/override.conf"
     state: touch
     mode: 0644
   when: not jenkins_init_file_stat.stat.exists
 
 - name: Populate jenkins_init_file with service tag.
   copy:
-    dest: "{{ jenkins_init_file }}"
+    dest: "/etc/systemd/system/jenkins.service.d/override.conf"
     content: "[Service]"
   when: not jenkins_init_file_stat.stat.exists
 
 - name: Modify variables in init file.
   lineinfile:
-    dest: "{{ jenkins_init_file }}"
+    dest: "/etc/systemd/system/jenkins.service.d/override.conf"
     insertafter: '^Environment="{{ item.option }}='
     regexp: '^Environment="{{ item.option }} '
     line: 'Environment="{{ item.option }}={{ item.value }}"'
@@ -42,7 +42,7 @@
 
 - name: Ensure jenkins_home {{ jenkins_home }} exists.
   file:
-    path: "{{ jenkins_home }}"
+    path: "/var/lib/jenkins"
     state: directory
     owner: jenkins
     group: jenkins
@@ -59,18 +59,18 @@
 
 - name: Create custom init scripts directory.
   file:
-    path: "{{ jenkins_home }}/init.groovy.d"
+    path: "/var/lib/jenkins/init.groovy.d"
     state: directory
-    owner: "{{ jenkins_process_user }}"
-    group: "{{ jenkins_process_group }}"
+    owner: "jenkins"
+    group: "jenkins"
     mode: 0775
 
 - name: Configure proxy config for Jenkins
   template:
     src: proxy.xml
-    dest: "{{ jenkins_home }}/proxy.xml"
-    owner: "{{ jenkins_process_user }}"
-    group: "{{ jenkins_process_group }}"
+    dest: "/var/lib/jenkins/proxy.xml"
+    owner: "jenkins"
+    group: "jenkins"
     mode: 0664
   register: jenkins_proxy_config
   when:
