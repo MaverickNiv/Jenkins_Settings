@@ -1,0 +1,179 @@
+###Change "value" to correct xml attribute type
+---
+- name: Ansible playbook to create config xml
+  hosts: localhost
+  tasks:
+  - name: change version
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/version/
+      value: {{config.hudson.version}}
+
+  - name: change number of executors
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/numExecutors/
+      value: {{config.hudson.numExecutors}}
+
+  - name: change mode
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/mode/
+      value: {{config.hudson.mode}}
+
+  - name: change useSecurity
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/useSecurity/
+      value: {{config.hudson.useSecurity}}
+
+  - name: change authorizationStrategy class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/authorizationStrategy/class/
+      value: {{config.hudson.authorizationStrategy.class}}
+
+  - name: change authorizationStrategy denyAnonymousReadAccess
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/authorizationStrategy/denyAnonymousReadAccess/
+      value: {{config.hudson.authorizationStrategy.denyAnonymousReadAccess}}
+
+  - name: change securityRealm class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/securityRealm/class/
+      value: {{config.hudson.securityRealm.class}}
+
+  - name: change securityRealm disableSignup
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/securityRealm/disableSignup/
+      value: {{config.hudson.securityRealm.disableSignup}}
+
+  - name: change securityRealm enableCaptcha
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/securityRealm/enableCaptcha/
+      value: {{config.hudson.securityRealm.enableCaptcha}}
+
+  - name: change disableRememberMe
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/disableRememberMe/
+      value: {{config.hudson.disableRememberMe}}
+
+  - name: change projectNamingStrategy class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/projectNamingStrategy/class/
+      value: {{config.hudson.projectNamingStrategy.class}}
+
+  - name: change workspaceDir
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/workspaceDir/
+      value: {{config.hudson.workspaceDir}}
+
+  - name: change buildsDir
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/buildsDir/
+      value: {{config.hudson.buildsDir}}
+
+
+  - name: change viewsTabBar class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/viewsTabBar/class/
+      value: {{config.hudson.viewsTabBar.class}}
+
+  - name: change myViewsTabBar class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/myViewsTabBar/class/
+      value: {{config.hudson.myViewsTabBar.class}}
+
+  - name: change scmCheckoutRetryCount
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/scmCheckoutRetryCount/
+      value: {{config.hudson.scmCheckoutRetryCount}}
+
+
+  - name: change views owner class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/views/hudson.model.AllView/owner/class/
+      count: {{config.hudson.views.owner.class}}
+
+  - name: change views owner reference
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/views/hudson.model.AllView/owner/reference/
+      count: {{config.hudson.views.owner.reference}}
+
+  - name: change views name
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/views/hudson.model.AllView/name/
+      count: {{config.hudson.views.name}}
+
+  - name: change views filterExecutors
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/views/hudson.model.AllView/filterExecutors/
+      count: {{config.hudson.views.filterExecutors}}
+
+  - name: change views filterQueue
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/views/hudson.model.AllView/filterQueue/
+      count: {{config.hudson.views.filterQueue}}
+
+  - name: change views properties class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/views/hudson.model.AllView/properties/class/
+      count: {{config.hudson.views.properties.class}}
+
+
+
+  - name: change primaryView
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/primaryView/
+      count: {{config.hudson.primaryView}}
+
+  - name: change slaveAgentPort
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/slaveAgentPort/
+      count: {{config.hudson.slaveAgentPort}}
+
+  - name: change label
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/label/
+      count: {{config.hudson.label}}
+
+
+  - name: change crumbIssuer class
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/crumbIssuer/class/
+      count: {{config.hudson.crumbIssuer.class}}
+
+  - name: change views owner excludeClientIPFromCrumb
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/crumbIssuer/excludeClientIPFromCrumb/
+      count: {{config.hudson.crumbIssuer.excludeClientIPFromCrumb}}
+
+
+
+  - name: change nodeRenameMigrationNeeded
+    community.general.xml:
+      path: /var/lib/jenkins/config.xml
+      xpath: /hudson/nodeRenameMigrationNeeded/
+      count: {{config.hudson.nodeRenameMigrationNeeded}}
