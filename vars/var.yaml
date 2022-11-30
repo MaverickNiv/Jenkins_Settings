@@ -1,0 +1,44 @@
+---
+- name: Ansible playbook to create config variables
+hosts: localhost
+vars:
+  config:
+    hudson:
+      - version: {{item.version}}
+      - numExecutors: {{item.numExecutors}}
+      - mode: {{item.mode}}
+      - useSecurity: {{item.useSecurity}}
+      authorizationStrategy:
+        - class: {{item.class}}
+        - denyAnonymousReadAccess: {{item.denyAnonymousReadAccess}}
+      securityRealm:
+        - class: {{item.class}}
+        - disableSignup: {{item.disableSignup}}
+        - enableCaptcha: {{item.enableCaptcha}}
+      disableRememberMe: {{item.disableRememberMe}}
+      projectNamingStrategy:
+        - class: {{item.class}}
+      - workspaceDir = {{item.workspaceDir}}
+      - buildsDir = {{item.buildsDir}}
+      viewsTabBar:
+        - class: {{item.class}}
+      myViewsTabBar:
+        - class: {{item.class}}
+      - scmCheckoutRetryCount = {{item.scmCheckoutRetryCount}}
+      views:
+        owner:
+          - class: {{item.class}}
+          - reference: {{item.reference}}
+        - name: {{item.name}}
+        - filterExecutors: {{item.filterExecutors}
+        - filterQueue: {{item.filterQueue}}
+        properties:
+            - class: {{item.properties_class}}
+      - primaryView: {{item.rimaryView}}
+      - slaveAgentPort: {{item.slaveAgentPort}}
+      - label: {{item.label}}
+      crumbIssuer:
+        - class: {{item.class}}
+        - excludeClientIPFromCrumb: {{item.excludeClientIPFromCrumb}}
+      - nodeRenameMigrationNeeded: {{item.nodeRenameMigrationNeeded}}
+
