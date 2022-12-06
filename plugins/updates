@@ -23,3 +23,10 @@
   replace:  # noqa 208
     path: "{{ jenkins_home }}/updates/default.json"
     regexp: "1d;$d"
+
+
+##Groovy Script
+def plugins = jenkins.model.Jenkins.instance.getPluginManager().getPlugins()
+plugins.each {println "${it.getShortName()}: ${it.getVersion()}"}
+
+$ java -jar jenkins-cli.jar -s http://localhost:8080 -auth admin:<password> groovy = < plugins.groovy > plugins.txt
